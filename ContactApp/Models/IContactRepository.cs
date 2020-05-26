@@ -9,9 +9,9 @@ namespace ContactApp.Models
      public interface IContactRepository
     {
         Task Add(Contact contact);
-        Task Update(Contact contact);
+        bool Update(Contact contact);
         Task Delete(int id);
         Task<Contact> GetContact(int id);
-        Task<IEnumerable<Contact>> GetContacts();
+        List<Contact> GetContacts();
     }
 }

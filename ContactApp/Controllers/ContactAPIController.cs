@@ -15,9 +15,9 @@ namespace ContactApp.Controllers
 
         [HttpGet]
         [Route("api/Contacts/Get")]
-        public async Task<IEnumerable<Contact>> Get()
+        public List<Contact> Get()
         {
-            return await _iContactRepository.GetContacts();
+            return _iContactRepository.GetContacts();
         }
 
         [HttpPost]
@@ -40,12 +40,13 @@ namespace ContactApp.Controllers
 
         [HttpPut]
         [Route("api/Contacts/Edit")]
-        public async Task EditAsync([FromBody]Contact contact)
+        public bool EditAsync([FromBody]Contact contact)
         {
             if (ModelState.IsValid)
             {
-                await _iContactRepository.Update(contact);
+                return _iContactRepository.Update(contact);
             }
+            return false;
         }
 
         [HttpDelete]

@@ -10,7 +10,15 @@ namespace ContactApp.Models
     {
         public ContactDbContext() : base("name=SqlConn")
         {
+
+
         }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    Database.SetInitializer<ContactDbContext>(null);
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
         public DbSet<Contact> Contacts { get; set; }
     }
 }

@@ -13,9 +13,10 @@ namespace ContactApp.Models
         public async Task Add(Contact contact)
         {
            
-            db.Contacts.Add(contact);
+           
             try
             {
+                db.Contacts.Add(contact);
                 await db.SaveChangesAsync();
             }
             catch
@@ -39,25 +40,36 @@ namespace ContactApp.Models
                 throw;
             }
         }
-        public async Task<IEnumerable<Contact>> GetContacts()
-        {
-           
+        public List<Contact>  GetContacts()
+        {           
             try
             {
-                var contacts = await db.Contacts.ToListAsync();
-                return contacts.AsQueryable();
+                
+                var contacts =  db.Contacts.ToList();
+                return contacts;
             }
             catch
             {
                 throw;
             }
         }
-        public async Task Update(Contact contact)
+        public bool Update(Contact contact)
         {
             try
             {
-                db.Entry(contact).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                //db.Entry(contact).State = EntityState.Modified;
+                Contact contact1 = db.Contacts.Find(contact.Id);
+                if (contact1 != null)
+                {
+                    contact1.FirstName = contact.FirstName;
+                    contact1.LastName = contact.LastName;
+                    contact1.Email = contact.Email;
+                    contact1.PhoneNumber = contact.PhoneNumber;
+                    contact1.Status = contact.Status;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch
             {

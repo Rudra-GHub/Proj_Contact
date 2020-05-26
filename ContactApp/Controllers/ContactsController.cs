@@ -132,7 +132,7 @@ namespace ContactApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "FirstName,LastName,Email,PhoneNumber,Status")] Contact contact)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Email,PhoneNumber,Status")] Contact contact)
         {
             if (ModelState.IsValid)
             {
